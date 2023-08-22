@@ -1,0 +1,80 @@
+<%- include('partials/_header.ejs'); -%>
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/addperson" method="post">
+                        <div class="form-group mt-2">
+                            <input type="text" name="name" placeholder="Name" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" name="lastname" placeholder="Last name" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" name="documentType" placeholder="Document type" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" name="documentNumber" placeholder="document number" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" name="age" placeholder="Age" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" name="cityOfBirth" placeholder="city of birth" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary"> SAVE </button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-12 mt-5">
+            <form action="/search" method="get">
+                <div class="form-group mt-2">
+                    <input type="text" name="data" placeholder="search" class="form-control">
+                </div>
+            </form>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Document type</th>
+                        <th>Document number</th>
+                        <th>Age</th>
+                        <th>City of birth</th>
+                        <th colspan="2" style="text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (data) { %>
+                        <% for (let i = 0; i < data.length; i++) {%>
+                            <tr>
+                                <td><%= (i + 1) %></td>
+                                <td><%= data[i].name %></td>
+                                <td><%= data[i].lastname %></td>
+                                <td><%= data[i].documentType %></td>
+                                <td><%= data[i].documentNumber %></td>
+                                <td><%= data[i].age %></td>
+                                <td><%= data[i].cityOfBirth %></td>
+                                <td>
+                                    <a href="/update/<%= data[i].id %>" class="btn btn-info"> Update </a>
+                                </td>
+                                <td>
+                                    <a href="/delete/<%= data[i].id %>" class="btn btn-danger"> Delete </a>
+                                </td>
+                            </tr>
+                        <%}%> 
+                    <%}%>
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+<%- include('partials/_footer.ejs'); -%>
